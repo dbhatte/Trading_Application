@@ -1,39 +1,45 @@
 package com.deutschebank.trading.algo;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 /**
  * This is your team’s code and should be changed as you see fit.
  */
+@Component
 class Application implements SignalHandler {
+    @Autowired
+    private AlgoProxy algoProxy;
+
     public void handleSignal(int signal) {
-        Algo algo = new Algo();
 
         switch (signal) {
             case 1:
-                algo.setUp();
-                algo.setAlgoParam(1,60);
-                algo.performCalc();
-                algo.submitToMarket();
+                algoProxy.setUp();
+                algoProxy.setAlgoParam(1,60);
+                algoProxy.performCalc();
+                algoProxy.submitToMarket();
                 break;
 
             case 2:
-                algo.reverse();
-                algo.setAlgoParam(1,80);
-                algo.submitToMarket();
+                algoProxy.reverse();
+                algoProxy.setAlgoParam(1,80);
+                algoProxy.submitToMarket();
                 break;
 
             case 3:
-                algo.setAlgoParam(1,90);
-                algo.setAlgoParam(2,15);
-                algo.performCalc();
-                algo.submitToMarket();
+                algoProxy.setAlgoParam(1,90);
+                algoProxy.setAlgoParam(2,15);
+                algoProxy.performCalc();
+                algoProxy.submitToMarket();
                 break;
 
             default:
-                algo.cancelTrades();
+                algoProxy.cancelTrades();
                 break;
         }
 
-        algo.doAlgo();
+        algoProxy.doAlgo();
     }
 }
 
