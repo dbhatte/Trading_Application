@@ -1,9 +1,6 @@
 package com.deutschebank.trading.algo;
 
-import com.deutschebank.trading.signal.DefaultStrategy;
-import com.deutschebank.trading.signal.FirstStrategy;
-import com.deutschebank.trading.signal.SecondStrategy;
-import com.deutschebank.trading.signal.ThirdStrategy;
+import com.deutschebank.trading.signal.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -16,37 +13,10 @@ public class Application implements SignalHandler {
     private AlgoProxy algoProxy;
 
     @Autowired
-    private FirstStrategy firstStrategy;
-
-    @Autowired
-    private SecondStrategy secondStrategy;
-
-    @Autowired
-    private ThirdStrategy thirdStrategy;
-
-    @Autowired
-    private DefaultStrategy defaultStrategy;
+    private SignalStrategyFactory signalStrategyFactory;
 
     public void handleSignal(int signal) {
-
-        switch (signal) {
-            case 1:
-                firstStrategy.execute();
-                break;
-
-            case 2:
-                secondStrategy.execute();
-                break;
-
-            case 3:
-                thirdStrategy.execute();
-                break;
-
-            default:
-                defaultStrategy.execute();
-                break;
-        }
-
+        signalStrategyFactory.getSignalStrategy(signal).execute();
         algoProxy.doAlgo();
     }
 }

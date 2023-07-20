@@ -1,4 +1,4 @@
 package com.deutschebank.trading.signal;
-interface AlgoStrategy {
+public interface AlgoStrategy {
     void execute();
 }
