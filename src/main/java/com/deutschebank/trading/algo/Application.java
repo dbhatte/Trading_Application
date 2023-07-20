@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
  * This is your team’s code and should be changed as you see fit.
  */
 @Component
+public
 class Application implements SignalHandler {
     @Autowired
     private AlgoProxy algoProxy;
