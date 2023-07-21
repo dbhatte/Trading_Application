@@ -9,7 +9,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-
+/**
+ * This class is the main class to register new Signals
+ * They can either be configured manually or added programmatically
+ * TODO: Make this class store the programmatically added signals to outside store as they are currently in-memory
+ * That will also help in running multiple instances of the application if required
+ * */
 @Component
 public class SignalStrategyFactory {
 

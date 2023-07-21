@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
- * This is your team’s code and should be changed as you see fit.
+ * This class is the main class to handle the signals
  */
 @Component
 public class Application implements SignalHandler {
