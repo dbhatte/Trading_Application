@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
 public class Application implements SignalHandler {
 
     private static final Logger logger = LoggerFactory.getLogger(Application.class);
+
     @Autowired
     private AlgoProxy algoProxy;
 

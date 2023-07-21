@@ -8,6 +8,7 @@ import javax.annotation.PostConstruct;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @Component
 public class SignalStrategyFactory {
@@ -15,6 +16,10 @@ public class SignalStrategyFactory {
     private final Map<Integer, AlgoStrategy> strategyMap = new HashMap<>();
     @Autowired
     private AlgoProxy algo;
+
+    public SignalStrategyFactory(AlgoProxy algo) {
+        this.algo = algo;
+    }
 
     @PostConstruct
     void init() {
@@ -25,6 +30,10 @@ public class SignalStrategyFactory {
 
     public AlgoStrategy getSignalStrategy(int signal) {
         return strategyMap.getOrDefault(signal, new ConcreteStrategy(List.of(algo::cancelTrades)));
+    }
+
+    public Optional<AlgoStrategy> getSignalStrategyOnlyIfPresent(int signal) {
+        return Optional.ofNullable(strategyMap.get(signal));
     }
 
     public void putSignalStrategy(Integer signal, ConcreteStrategy concreteStrategy) {

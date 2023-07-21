@@ -1,5 +1,7 @@
 package com.deutschebank.trading;
 
+import com.deutschebank.trading.rest.dto.Step;
+import com.deutschebank.trading.rest.dto.StepConfiguration;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.reactive.AutoConfigureWebTestClient;
@@ -38,4 +40,20 @@ class TradingApplicationTests {
 				.expectStatus().isAccepted();
 	}
 
+	@Test
+	public void testConfiguredSignal() {
+		webClient.post().uri("/api/strategy/4")
+				.contentType(MediaType.APPLICATION_JSON)
+				.exchange()
+				.expectStatus().isAccepted();
+		webClient.put().uri("/api/strategy/4")
+				.contentType(MediaType.APPLICATION_JSON)
+				.bodyValue(new StepConfiguration(Step.SETUP, 0, 0))
+				.exchange()
+				.expectStatus().isAccepted();
+		webClient.post().uri("/api/signal/4")
+				.contentType(MediaType.APPLICATION_JSON)
+				.exchange()
+				.expectStatus().isAccepted();
+	}
 }
